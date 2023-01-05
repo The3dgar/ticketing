@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expiration-depl
+  labels:
+    app: expiration
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expiration
+  template: # how create each individual pod in the deployment
+    metadata:
+      labels: 
+        app: expiration
+    spec:
+      containers:
+        - name: expiration
+          image: edgarolivar16/ticket_services:latest
+          imagePullPolicy: IfNotPresent
+          command: ["yarn", "expiration"]
+          env:
+            - name: EVENT_CLUSTER_ID
+              value: 'ticketing'
+            - name: EVENT_CLIENT_ID
+              valueFrom: 
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: EVENT_URL
+              value: 'http://nats-srv:4222'
+            - name: REDIS_HOST
+              value: 'expiration-redis-srv'
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+
+# in this case we just need a pod with the container!

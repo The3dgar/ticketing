@@ -1,0 +1,32 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*.yaml
+build:
+  local:
+    push: false
+  artifacts:
+    - image: edgarolivar16/ticket_services
+      context: services
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    # - image: edgarolivar16/ticket_client
+    #   context: client
+    #   docker:
+    #     dockerfile: Dockerfile
+    #   sync:
+    #     manual:
+    #       - src: '**/*.js'
+    #         dest: .
+# manifests:
+#   rawYaml:
+#     - "./infra/k8s/*"
+# deploy:
+#   kubectl:
+#     {}

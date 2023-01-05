@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments-depl
+  labels:
+    app: payments
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payments
+  template: # how create each individual pod in the deployment
+    metadata:
+      labels: 
+        app: payments
+    spec:
+      containers:
+        - name: payments
+          image: edgarolivar16/ticket_services:latest
+          imagePullPolicy: IfNotPresent
+          command: ["yarn", "payments"]
+          env:
+            - name: PORT
+              value: "3000"
+            - name: MONGODB_URI
+              value: "mongodb://payments-mongo-srv:27017/payments"
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+            - name: STRIPE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: stripe-secret
+                  key: STRIPE_KEY
+            - name: EVENT_CLUSTER_ID
+              value: 'ticketing'
+            - name: EVENT_CLIENT_ID
+              valueFrom: 
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: EVENT_URL
+              value: 'http://nats-srv:4222'
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: payments-srv
+spec:
+  selector:
+    app: payments
+  ports:
+    - name: payments
+      port: 3000
+      targetPort: 3000
+      protocol: TCP

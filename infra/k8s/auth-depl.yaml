@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-depl
+  labels:
+    app: auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template: # how create each individual pod in the deployment
+    metadata:
+      labels: 
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: edgarolivar16/ticket_services:latest
+          imagePullPolicy: IfNotPresent
+          command: ["yarn", "auth"]
+          env:
+            - name: PORT
+              value: "3000"
+            - name: MONGODB_URI
+              value: "mongodb://auth-mongo-srv:27017/auth"
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-srv
+spec:
+  selector:
+    app: auth
+  ports:
+    - name: auth
+      port: 3000
+      targetPort: 3000
+      protocol: TCP
