@@ -4,7 +4,7 @@ import { TicketAttrs, Ticket, TicketDoc } from '../models/ticket';
 
 export class TicketService {
   static getTickets() {
-    return Ticket.find({});
+    return Ticket.find({orderId: undefined});
   }
 
   static async getTicketById(id: string) {

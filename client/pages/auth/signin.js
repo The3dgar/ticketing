@@ -48,16 +48,9 @@ const signin = () => {
       </div>
 
       <button className='btn btn-primary'>Sign In</button>
-      {!!errors.length && (
-        <div className='alert alert-danger'>
-          <h4>Oopss...</h4>
-          <ul className='my-0'>
-            {errors.map((e) => (
-              <li key={e.message}>{e.message}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {
+        errors
+      }
     </form>
   );
 };

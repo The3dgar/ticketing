@@ -7,16 +7,19 @@ function MyApp({ Component, pageProps, currentUser }) {
   return (
     <div>
       <Header currentUser={currentUser} />
-      <Component {...pageProps} />
+      <div className='container'>
+        <Component {...pageProps} currentUser={currentUser} />
+      </div>
     </div>
   );
 }
 
 MyApp.getInitialProps = async ({ Component, ctx }) => {
-  const { data } = await buildClient(ctx).get(urlCurrentUser);
+  const client = buildClient(ctx);
+  const { data } = await client.get(urlCurrentUser);
   let pageProps = {};
   if (Component.getInitialProps) {
-    pageProps = await Component.getInitialProps(ctx);
+    pageProps = await Component.getInitialProps(ctx, client, data.currentUser);
   }
 
   return {

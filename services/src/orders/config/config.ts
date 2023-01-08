@@ -6,7 +6,7 @@ const config = {
   EVENT_CLIENT_ID: process.env.EVENT_CLIENT_ID || 'any',
   EVENT_URL: process.env.EVENT_URL || 'http://nats-srv:4222',
   EXPIRATION_WINDOW_SECONDS: parseInt(
-    `${process.env.EXPIRATION_WINDOW_SECONDS || 15 * 60}`
+    `${process.env.EXPIRATION_WINDOW_SECONDS || 1 * 60}`
   ),
 };
 

@@ -15,7 +15,7 @@ export class PaymentCreatedListener extends Listener<PaymentCreatedEvent> {
 
   async onMessage(data: PaymentCreatedEvent['data'], msg: Message) {
     try {
-      const order = await OrderService.getOrderById(data.id);
+      const order = await OrderService.getOrderById(data.orderId);
       if (!order) {
         throw new Error('Order not found');
       }
