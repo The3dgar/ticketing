@@ -9,6 +9,7 @@
     "auth": "ts-node-dev src/auth/index.ts",
     "auth:prod": "node build/auth",
     "auth:test": "jest --selectProjects=auth --watchAll --no-cache --detectOpenHandles",
+    "auth:test:ci": "jest --selectProjects=auth --detectOpenHandles",
     "tickets": "ts-node-dev src/tickets/index.ts",
     "tickets:prod": "node build/tickets",
     "tickets:test": "jest tickets --watchAll --no-cache",
