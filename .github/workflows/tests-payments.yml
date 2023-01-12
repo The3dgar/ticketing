@@ -1,0 +1,12 @@
+name : tests-payments
+on:
+  pull_request:
+    paths:
+      - 'services/src/payments/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd services && npm install && npm run payments:test:ci
