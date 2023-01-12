@@ -13,15 +13,18 @@
     "tickets": "ts-node-dev src/tickets/index.ts",
     "tickets:prod": "node build/tickets",
     "tickets:test": "jest tickets --watchAll --no-cache",
+    "tickets:test:ci": "jest --selectProjects=tickets --detectOpenHandles",
     "orders": "ts-node-dev src/orders/index.ts",
     "orders:prod": "node build/orders",
     "orders:test": "jest orders --watchAll --no-cache",
+    "orders:test:ci": "jest --selectProjects=orders --detectOpenHandles",
     "expiration": "ts-node-dev src/expiration/index.ts",
     "expiration:prod": "node build/expiration",
     "expiration:test": "jest expiration --watchAll --no-cache",
     "payments": "ts-node-dev src/payments/index.ts",
     "payments:prod": "node build/payments",
-    "payments:test": "jest payments --watchAll --no-cache"
+    "payments:test": "jest payments --watchAll --no-cache",
+    "payments:test:ci": "jest --selectProjects=payments --detectOpenHandles"
   },
   "dependencies": {
     "@eotickets/common": "^1.0.26",

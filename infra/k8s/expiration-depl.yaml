@@ -30,12 +30,12 @@ spec:
               value: 'http://nats-srv:4222'
             - name: REDIS_HOST
               value: 'expiration-redis-srv'
-          resources:
-            limits:
-              memory: 512Mi
-              cpu: "1"
-            requests:
-              memory: 256Mi
-              cpu: "0.2"
+          # resources:
+          #   limits:
+          #     memory: 512Mi
+          #     cpu: "1"
+          #   requests:
+          #     memory: 256Mi
+          #     cpu: "0.2"
 
 # in this case we just need a pod with the container!

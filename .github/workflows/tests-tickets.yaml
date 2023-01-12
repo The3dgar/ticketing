@@ -1,0 +1,12 @@
+name : tests-tickets
+on:
+  pull_request:
+    paths:
+      - 'services/src/tickets/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd services && npm install && npm run tickets:test:ci
