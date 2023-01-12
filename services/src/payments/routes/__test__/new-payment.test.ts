@@ -69,11 +69,12 @@ describe(`POST ${routeName}`, () => {
 
   it('returns a 204 with a valid inputs', async () => {
     const userId = new mongoose.Types.ObjectId().toHexString();
+    const price = Math.floor(Math.random() * 100000);
     const order = await OrderService.createOrder({
       id: new mongoose.Types.ObjectId().toHexString(),
       userId,
       version: 0,
-      price: 20,
+      price,
       status: OrderStatus.Created,
     });
 
