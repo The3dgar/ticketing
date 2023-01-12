@@ -8,7 +8,7 @@ metadata:
 spec:
   rules:
     # change your host file to reach this url at localhost
-    - host: ticketing-eo.dev
+    - host: ticketing-eo.devp
       http:
         paths:
           - path: /api/users/?(.*)
