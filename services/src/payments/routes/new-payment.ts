@@ -51,7 +51,7 @@ router.post(
     });
 
     const payment = Payment.build({
-      orderId: orderId,
+      orderId,
       stripeId: charge.id,
     });
 
@@ -59,7 +59,7 @@ router.post(
     await new PaymentCreatedPublisher(natsWrapper.client).publish({
       id: payment.id,
       orderId: payment.orderId,
-      stripeId: charge.id,
+      stripeId: payment.stripeId,
     });
 
     res.status(201).send({
