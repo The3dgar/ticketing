@@ -18,7 +18,7 @@ class NatsWrapper {
   }
 
   connect({ clientId, clusterId, url }: ConnectInterface) {
-    this._client = nats.connect(clusterId, clientId, { url });
+    this._client = nats.connect(clusterId, clientId, { url, waitOnFirstConnect: true });
 
     return new Promise<void>((res, rej) => {
       this.client.on('connect', () => {
