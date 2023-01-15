@@ -5,7 +5,7 @@ import { app } from './app';
 const port = config.PORT;
 
 const start = async () => {
-  console.log('Starting up! xd');
+  console.log('Starting...');
   await startDbConnection(config.MONGODB_URI);
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

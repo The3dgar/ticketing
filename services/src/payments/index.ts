@@ -8,7 +8,7 @@ import { OrderCancelledListener } from './events/listeners/order-cancelled-liste
 const port = config.PORT;
 
 const start = async () => {
-  console.log('Starting up! xd');
+  console.log('Starting...');
   await natsWrapper.connect({
     clusterId: config.EVENT_CLUSTER_ID,
     clientId: config.EVENT_CLIENT_ID,
