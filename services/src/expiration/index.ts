@@ -3,7 +3,7 @@ import { OrderCreatedListener } from './events/listeners/order-created-listener'
 import { natsWrapper } from './events/nats-wrapper';
 
 const start = async () => {
-  console.log('Starting up! xd');
+  console.log('Starting...');
   try {
     await natsWrapper.connect({
       clusterId: config.EVENT_CLUSTER_ID,
