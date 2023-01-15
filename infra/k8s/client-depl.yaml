@@ -18,7 +18,6 @@ spec:
         - name: client
           image: edgarolivar16/ticket_client:latest
           imagePullPolicy: IfNotPresent
-          command: ["yarn", "dev"]
 ---
 
 apiVersion: v1
